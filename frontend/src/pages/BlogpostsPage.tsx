@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
 import { usePosts } from "../context/PostsContext";
 import SinglePost from "../components/SinglePost";
+import { useNavigate } from "react-router-dom";
 
 const BlogpostsPage = () => {
-  const { getPosts, posts } = usePosts();
-
+  const { getPosts, posts, getPost } = usePosts();
+  const navigate = useNavigate();
 
   // hämtar posts när komponenten laddas in
   useEffect(() => {
@@ -21,6 +22,10 @@ const BlogpostsPage = () => {
             // gjorde article här så key funkar
             <article key={post._id}>
               <SinglePost _id={post._id} title={post.title} author={post.author} content={post.content} date={post.date} />
+              <p onClick={() => {
+                getPost(post);
+                navigate(`/post/:${post._id}`);
+              }}>Läs mer</p>
             </article>
           )) : <p>Inga blogginlägg hittades</p>
       }

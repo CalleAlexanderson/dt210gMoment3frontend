@@ -1,5 +1,7 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import { PostsContextType, Post } from "../types/posts.types";
+import { useLogin } from "./LoginContext";
+
 
 const PostsContext = createContext<PostsContextType | null>(null);
 
@@ -12,6 +14,7 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
     const [posts, setPosts] = useState<Post[]>([]);
     const [singlePost, setSinglePost] = useState<Post | null>(null);
+    const {user} = useLogin();
 
     // hämtar poster
     const getPosts = async () => {
@@ -90,14 +93,17 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
                 headers: {
                     'authorization': key
                 },
+                body: JSON.stringify({ role: user?.role})
             })
 
             if (!response.ok) {
                 throw new Error;
             }
+            const data = await response.json() as any;
 
-            const data = await response.json() as Post;
-            console.log(data);
+            if (!data.deleted) {
+                throw new Error
+            }
             getPosts();
         } catch (error) {
             throw error;
