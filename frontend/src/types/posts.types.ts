@@ -13,6 +13,6 @@ export interface PostsContextType {
     singlePost: Post | null,
     getPosts: () => Promise<void>; // Post[]
     getPost: (sPost: Post) => Promise<void>;
-    updatePost: (newPost: Post) => Promise<void>;
-    deletePost: () => Promise<void>;
+    updatePost: (uPost: Post) => Promise<void>;
+    deletePost: (dPost: Post) => Promise<void>;
 }

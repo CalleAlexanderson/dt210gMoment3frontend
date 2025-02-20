@@ -23,7 +23,8 @@ const BlogpostsPage = () => {
               <SinglePost _id={post._id} title={post.title} author={post.author} content={post.content} date={post.date} />
             </article>
           )) : <p>Inga blogginlägg hittades</p>
-      }</>
+      }
+    </>
 
   )
 }
