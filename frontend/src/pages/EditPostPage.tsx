@@ -7,7 +7,10 @@ const EditPostPage = () => {
     const [title, setTitle] = useState(singlePost?.title);
     const [content, setContnent] = useState(singlePost?.content);
     const navigate = useNavigate();
-    const { id } = useParams()
+    let { id } = useParams()
+    id = id?.substring(1, id.length);
+    
+    
 
     // anropar login från LoginContext
         const EditPostFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
