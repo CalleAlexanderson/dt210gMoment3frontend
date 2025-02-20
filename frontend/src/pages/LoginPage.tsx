@@ -35,13 +35,7 @@ const LoginPage = () => {
         <div>
             <h1>Logga in</h1>
             <form onSubmit={loginFormSubmit}>
-                {
-                    error && (
-                        <div className="error-div">
-                            <p>{error}</p>
-                        </div>
-                    )
-                }
+                
 
                 <div>
                     <label htmlFor="username">Användarnamn</label>
@@ -54,7 +48,13 @@ const LoginPage = () => {
                 </div>
 
                 <input type="submit" value="Logga in" />
-
+                {
+                    error && (
+                        <div className="error-div">
+                            <p>{error}</p>
+                        </div>
+                    )
+                }
             </form>
         </div>
     )
