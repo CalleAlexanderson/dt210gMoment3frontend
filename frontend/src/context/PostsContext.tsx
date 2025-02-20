@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode } from "react";
-import { PostsContextType, Post } from "../types/posts.types";
+import { PostsContextType, Post, UPost } from "../types/posts.types";
 import { useLogin } from "./LoginContext";
 
 
@@ -62,22 +62,30 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
     }
 
     // uppdatera en post, inte påbörjad
-    const updatePost = async (uPost: Post) => {
+    const updatePost = async (uPost: UPost) => {
         console.log(uPost);
-
+        let key: string = "Bearer " + localStorage.getItem('jwt')
         try {
-            const response = await fetch(`http://127.0.0.1:3000/update/${uPost._id}`)
+            const response = await fetch(`http://127.0.0.1:3000/update/${uPost._id}`, {
+                method: "PUT",
+                headers: {
+                    'authorization': key
+                },
+                body: JSON.stringify({ 
+                    title: uPost.title,
+                    content: uPost.content,
+                })
+            })
 
             if (!response.ok) {
                 throw new Error;
             }
 
-            const data = await response.json() as Post;
+            const data = await response.json() as any;
             console.log(data);
 
 
-
-            // setPosts(data);
+            getPosts();
         } catch (error) {
             throw error;
         }
