@@ -1,6 +1,11 @@
+import { usePosts } from "../context/PostsContext";
+
 const SinglepostPage = () => {
+  const { singlePost } = usePosts();
   return (
-    <div>SinglepostPage</div>
+    <>
+      <p>{singlePost?.content}</p>
+    </>
   )
 }
 
