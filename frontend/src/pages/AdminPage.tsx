@@ -4,14 +4,25 @@ import SinglePost from "../components/SinglePost";
 import { Post } from "../types/posts.types";
 import { useNavigate } from "react-router-dom";
 import './css/BlogpostsPage.css'
+import './css/AdminPage.css'
 
 const AdminPage = () => {
   const { getPosts, posts, deletePost, getPost } = usePosts();
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
+  // placeholder Post för useState
+  const placeholderPost : Post = {_id: "", title: "", content: "", author: "", date: new Date};
+  const [deleteConfirmPost, setdeleteConfirmPost] = useState(placeholderPost);
 
-  const deleteBtnClicked = async (dp: Post) => {
+  const deleteBtnClicked = (dp: Post) => {
+    setdeleteConfirmPost(dp);
+    setdeleteConfirmDivClass('delete-confirm-div');
+  }
+
+  const deleteConfirmed = async (dp: Post) => {
     setError('');
+    setdeleteConfirmDivClass('delete-confirm-div hidden');
     try {
       await deletePost(dp)
     } catch (error) {
@@ -35,6 +46,16 @@ const AdminPage = () => {
           </div>
         )
       }
+      <div className={deleteConfirmDivClass}>
+          <p>Vill du verkligen ta bort inlägget "{deleteConfirmPost.title}"?</p>
+          <button className="delete-yes" onClick={()=> {
+            deleteConfirmed(deleteConfirmPost);
+          }}>Ja</button>
+          <button className="delete-no"  onClick={() => {
+            setdeleteConfirmDivClass('delete-confirm-div hidden');
+          }}
+          >Nej</button>
+      </div>
       <div className="blogposts-display">
         {
           // Kollar så posts inte är tom
@@ -44,12 +65,12 @@ const AdminPage = () => {
               <article key={post._id}>
                 <SinglePost _id={post._id} title={post.title} author={post.author} content={post.content} date={post.date} />
 
-                <button onClick={async () => {
+                <button className="admin-btn edit" onClick={async () => {
                   await getPost(post);
                   navigate(`/edit/:${post._id}`);
                 }}>Edit</button>
 
-                <button onClick={() => {
+                <button className="admin-btn del" onClick={() => {
                   deleteBtnClicked(post)
                 }}>Delete</button>
               </article>

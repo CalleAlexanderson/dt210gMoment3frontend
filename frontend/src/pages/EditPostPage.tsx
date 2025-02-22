@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePosts } from "../context/PostsContext";
 import { useNavigate, useParams } from "react-router-dom";
+import './css/EditPostPage.css'
 
 const EditPostPage = () => {
     const { singlePost, updatePost } = usePosts();
@@ -34,11 +35,11 @@ const EditPostPage = () => {
     <>
         <form onSubmit={EditPostFormSubmit}>
             <div>
-                <label htmlFor="title"></label>
+                <label htmlFor="title">Titel</label>
                 <input type="text" id="title" required autoComplete="off" value={title} onChange={(event) => setTitle(event.target.value)} />
             </div>
             <div>
-                <label htmlFor="content"></label>
+                <label htmlFor="content">Innehåll</label>
                 <textarea id="content" value={content} onChange={(event) => setContnent(event.target.value)}></textarea>
             </div>
             <input type="submit" value="Spara" />
