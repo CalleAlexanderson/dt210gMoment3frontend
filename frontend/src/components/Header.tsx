@@ -10,6 +10,8 @@ const Header = () => {
   useEffect(() => {
     if (user) {
       setLockedRoute('');
+    } else {
+      setLockedRoute('locked');
     }
   }, [user])
 

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { usePosts } from "../context/PostsContext";
+import { useLogin } from "../context/LoginContext";
 import SinglePost from "../components/SinglePost";
 import { Post } from "../types/posts.types";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ import './css/AdminPage.css'
 
 const AdminPage = () => {
   const { getPosts, posts, deletePost, getPost } = usePosts();
+      const {logout} = useLogin();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
@@ -38,7 +40,8 @@ const AdminPage = () => {
 
   return (
     <>
-      <h1 className="posts-heading">Admin</h1>
+      
+      <h1 className="posts-heading">Admin <button className="logout-btn" onClick={logout}>Logga ut</button></h1>
       <button className="admin-add-btn" onClick={() => {
                   navigate(`/admin/add`);
                 }}>Skapa inlägg</button>
