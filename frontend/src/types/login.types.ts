@@ -7,8 +7,8 @@ export interface User {
 
 // det som skickas med i login
 export interface LoginCredentials {
-    username: string,
-    password: string
+    username?: string,
+    password?: string
 }
 
 // respons från backend på login
