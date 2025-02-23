@@ -23,4 +23,5 @@ export interface LoginContextType {
     user: User | null,
     login: (credentials: LoginCredentials) => Promise<void>;
     logout: () => void;
+    checkJwt: () => Promise<void>;
 }

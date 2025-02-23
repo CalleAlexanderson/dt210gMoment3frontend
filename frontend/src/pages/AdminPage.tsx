@@ -9,12 +9,13 @@ import './css/AdminPage.css'
 
 const AdminPage = () => {
   const { getPosts, posts, deletePost, getPost } = usePosts();
-      const {logout} = useLogin();
+  const { logout, user } = useLogin();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
+  
   // placeholder Post för useState
-  const placeholderPost : Post = {_id: "", title: "", content: "", author: "", date: new Date};
+  const placeholderPost: Post = { _id: "", title: "", content: "", author: "", date: new Date };
   const [deleteConfirmPost, setdeleteConfirmPost] = useState(placeholderPost);
 
   const deleteBtnClicked = (dp: Post) => {
@@ -40,11 +41,14 @@ const AdminPage = () => {
 
   return (
     <>
-      
-      <h1 className="posts-heading">Admin <button className="logout-btn" onClick={logout}>Logga ut</button></h1>
+      <div className="posts-heading">
+        <h1>Admin</h1>
+        <p>Inloggad som {user?.username}</p>
+        <button className="logout-btn" onClick={logout}>Logga ut</button>
+      </div>
       <button className="admin-add-btn" onClick={() => {
-                  navigate(`/admin/add`);
-                }}>Skapa inlägg</button>
+        navigate(`/admin/add`);
+      }}>Skapa inlägg</button>
       {
         error && (
           <div className="error-div">
@@ -53,14 +57,14 @@ const AdminPage = () => {
         )
       }
       <div className={deleteConfirmDivClass}>
-          <p>Vill du verkligen ta bort inlägget "{deleteConfirmPost.title}"?</p>
-          <button className="delete-yes" onClick={()=> {
-            deleteConfirmed(deleteConfirmPost);
-          }}>Ja</button>
-          <button className="delete-no"  onClick={() => {
-            setdeleteConfirmDivClass('delete-confirm-div hidden');
-          }}
-          >Nej</button>
+        <p>Vill du verkligen ta bort inlägget "{deleteConfirmPost.title}"?</p>
+        <button className="delete-yes" onClick={() => {
+          deleteConfirmed(deleteConfirmPost);
+        }}>Ja</button>
+        <button className="delete-no" onClick={() => {
+          setdeleteConfirmDivClass('delete-confirm-div hidden');
+        }}
+        >Nej</button>
       </div>
       <div className="blogposts-display">
         {

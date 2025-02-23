@@ -28,13 +28,6 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
             const data = await response.json() as Post[];
 
-            console.log(data);
-            for (let index = 0; index < data.length; index++) {
-                console.log(data[index]._id);
-            }
-
-
-
             setPosts(data);
         } catch (error) {
             throw error;
@@ -53,8 +46,6 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
             const data = await response.json() as Post;
             console.log(data);
 
-
-
             setSinglePost(data);
         } catch (error) {
             throw error;
@@ -63,7 +54,6 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
     // uppdatera en post, inte påbörjad
     const addPost = async (aPost: APost) => {
-        console.log(aPost);
         let key: string = "Bearer " + localStorage.getItem('jwt')
         try {
             const response = await fetch(`http://127.0.0.1:3000/add/post`, {
@@ -91,7 +81,6 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
     // uppdatera en post, inte påbörjad
     const updatePost = async (uPost: UPost) => {
-        console.log(uPost);
         let key: string = "Bearer " + localStorage.getItem('jwt')
         try {
             const response = await fetch(`http://127.0.0.1:3000/update/${uPost._id}`, {
@@ -121,7 +110,6 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
     // ta bort en post
     const deletePost = async (dPost: Post) => {
-        console.log(dPost);
         let key: string = "Bearer " + localStorage.getItem('jwt')
         try {
             const response = await fetch(`http://127.0.0.1:3000/delete/${dPost._id}`, {
