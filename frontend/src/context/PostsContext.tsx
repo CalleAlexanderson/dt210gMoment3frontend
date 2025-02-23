@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode } from "react";
-import { PostsContextType, Post, UPost } from "../types/posts.types";
+import { PostsContextType, Post, UPost, APost } from "../types/posts.types";
 import { useLogin } from "./LoginContext";
 
 
@@ -56,6 +56,34 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
 
 
             setSinglePost(data);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    // uppdatera en post, inte påbörjad
+    const addPost = async (aPost: APost) => {
+        console.log(aPost);
+        let key: string = "Bearer " + localStorage.getItem('jwt')
+        try {
+            const response = await fetch(`http://127.0.0.1:3000/add/post`, {
+                method: "POST",
+                headers: {
+                    'authorization': key
+                },
+                body: JSON.stringify({ 
+                    title: aPost.title,
+                    author: user?.username,
+                    content: aPost.content,
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error;
+            }
+
+            const data = await response.json() as any;
+            console.log(data);
         } catch (error) {
             throw error;
         }
@@ -119,7 +147,7 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
     }
 
     return (
-        <PostsContext.Provider value={{ getPosts, getPost, updatePost, deletePost, posts, singlePost }}>
+        <PostsContext.Provider value={{ getPosts, getPost, addPost, updatePost, deletePost, posts, singlePost }}>
             {
                 children
             }

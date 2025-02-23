@@ -1,3 +1,24 @@
+.admin-add-btn {
+    display: block;
+    width: 200px;
+    font-size: 1.25rem;
+    margin: 10px auto;
+    padding: 10px 0px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: cadetblue;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.25s background;
+}
+
+.admin-add-btn:hover {
+    background-color: #78c8c8;
+}
+
 .admin-btn {
     position: absolute;
     bottom: 10px;
@@ -21,6 +42,10 @@
 .admin-btn.edit {
     right: 85px;
     transition: 0.25s;
+}
+
+.admin-btn.edit:hover {
+    background-color: #78c8c8;
 }
 
 .delete-confirm-div {

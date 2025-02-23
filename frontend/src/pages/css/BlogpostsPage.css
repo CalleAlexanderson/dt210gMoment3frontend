@@ -26,10 +26,6 @@ article {
     cursor: pointer;
 }
 
-.admin-btn.edit:hover {
-    background-color: #78c8c8;
-}
-
 .readmore:hover {
     border-bottom: 1px solid white;
     padding-bottom: 0;

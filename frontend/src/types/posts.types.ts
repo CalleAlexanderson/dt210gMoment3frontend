@@ -7,6 +7,12 @@ export interface Post {
     date: Date
 }
 
+// lägg till blogginlägg
+export interface APost {
+    title?: string,
+    content?: string
+}
+
 // uppdatera blogginlägg
 export interface UPost {
     _id?: string,
@@ -20,6 +26,7 @@ export interface PostsContextType {
     singlePost: Post | null,
     getPosts: () => Promise<void>; // Post[]
     getPost: (id: string) => Promise<void>;
+    addPost: (aPost: APost) => Promise<void>;
     updatePost: (uPost: UPost) => Promise<void>;
     deletePost: (dPost: Post) => Promise<void>;
 }

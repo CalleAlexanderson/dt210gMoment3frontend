@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import SinglepostPage from "./pages/SinglepostPage";
 import AdminPage from "./pages/AdminPage";
 import EditPostPage from "./pages/EditPostPage";
+import AddPostPage from "./pages/AddPostPage";
 
 const router = createBrowserRouter([
     {
@@ -39,10 +40,19 @@ const router = createBrowserRouter([
                 )
             },
             {
-                path: "/edit/:id",
+                path: "/admin/edit/:id",
                 element: (
                     <ProtectedRoute>
                         <EditPostPage />
+                    </ProtectedRoute>
+
+                )
+            },
+            {
+                path: "/admin/add",
+                element: (
+                    <ProtectedRoute>
+                        <AddPostPage />
                     </ProtectedRoute>
 
                 )

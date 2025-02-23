@@ -39,6 +39,9 @@ const AdminPage = () => {
   return (
     <>
       <h1 className="posts-heading">Admin</h1>
+      <button className="admin-add-btn" onClick={() => {
+                  navigate(`/admin/add`);
+                }}>Skapa inlägg</button>
       {
         error && (
           <div className="error-div">
@@ -66,13 +69,13 @@ const AdminPage = () => {
                 <SinglePost _id={post._id} title={post.title} author={post.author} content={post.content} date={post.date} />
 
                 <button className="admin-btn edit" onClick={async () => {
-                  await getPost(post);
-                  navigate(`/edit/:${post._id}`);
-                }}>Edit</button>
+                  await getPost(post._id);
+                  navigate(`/admin/edit/:${post._id}`);
+                }}>Redigera</button>
 
                 <button className="admin-btn del" onClick={() => {
                   deleteBtnClicked(post)
-                }}>Delete</button>
+                }}>Ta bort</button>
               </article>
             )) : <p>Inga blogginlägg hittades</p>
         }

@@ -10,42 +10,45 @@ const EditPostPage = () => {
     const navigate = useNavigate();
     let { id } = useParams()
     id = id?.substring(1, id.length);
-    
-    
+
+
 
     // anropar login från LoginContext
-        const EditPostFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            try {
-                let newPost = {
-                    _id: id,
-                    title: title,
-                    content: content
-                }
-                await updatePost(newPost);
-                navigate("/admin")
-            } catch (error) {
-                setTitle('');
-                setContnent('');
+    const EditPostFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            let newPost = {
+                _id: id,
+                title: title,
+                content: content
             }
+            await updatePost(newPost);
+            navigate("/admin")
+        } catch (error) {
+            setTitle('');
+            setContnent('');
         }
+    }
 
 
-  return (
-    <>
-        <form onSubmit={EditPostFormSubmit}>
-            <div>
-                <label htmlFor="title">Titel</label>
-                <input type="text" id="title" required autoComplete="off" value={title} onChange={(event) => setTitle(event.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="content">Innehåll</label>
-                <textarea id="content" value={content} onChange={(event) => setContnent(event.target.value)}></textarea>
-            </div>
-            <input type="submit" value="Spara" />
-        </form>
-    </>
-  )
+    return (
+        <>
+            <form className="admin-form" onSubmit={EditPostFormSubmit}>
+                <p role="link" className="return-blog" onClick={() => {
+                    navigate('/admin');
+                }}>➦</p>
+                <div>
+                    <label htmlFor="title">Titel</label>
+                    <input type="text" id="title" required autoComplete="off" value={title} onChange={(event) => setTitle(event.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="content">Innehåll</label>
+                    <textarea id="content" value={content} onChange={(event) => setContnent(event.target.value)}></textarea>
+                </div>
+                <input type="submit" value="Spara" />
+            </form>
+        </>
+    )
 }
 
 export default EditPostPage
