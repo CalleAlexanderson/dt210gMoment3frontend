@@ -20,16 +20,16 @@ const SinglepostPage = () => {
   }, [])
 
   return (
-    <article>
+    <article className="singlepost-article">
       <p role="link" className="return-blog" onClick={() => {
         navigate('/posts');
       }}>➦</p>
-      <h1>{singlePost?.title}</h1>
-      <div>
+      <h1 className="singlepost-heading">{singlePost?.title}</h1>
+      <div className="author-date single-a-d">
         <p>{singlePost?.author}</p>
         <p>{date}</p>
       </div>
-      <p>{singlePost?.content}</p>
+      <p className="singlepost-content">{singlePost?.content}</p>
     </article>
 
   )
