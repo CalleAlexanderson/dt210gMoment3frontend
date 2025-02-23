@@ -5,6 +5,9 @@ header{
 }
 
 header nav{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0);
     width: 100%;
     width: 95%;
     max-width: 750px;
@@ -16,6 +19,7 @@ header nav{
     border-bottom: 2px solid black;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    z-index: +5;
 }
 
 header nav ul {

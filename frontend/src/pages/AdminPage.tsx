@@ -13,7 +13,7 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
-  
+
   // placeholder Post för useState
   const placeholderPost: Post = { _id: "", title: "", content: "", author: "", date: new Date };
   const [deleteConfirmPost, setdeleteConfirmPost] = useState(placeholderPost);
@@ -29,6 +29,10 @@ const AdminPage = () => {
     try {
       await deletePost(dp)
     } catch (error) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
       setError("Du har inte befogenhet att ta bort blogginlägg")
     }
   }
@@ -43,7 +47,7 @@ const AdminPage = () => {
     <>
       <div className="posts-heading">
         <h1>Admin</h1>
-        <p>Inloggad som {user?.username}</p>
+        <p className="logged-in-user">Inloggad som <i>{user?.username}</i></p>
         <button className="logout-btn" onClick={logout}>Logga ut</button>
       </div>
       <button className="admin-add-btn" onClick={() => {

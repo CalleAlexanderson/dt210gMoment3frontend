@@ -6,3 +6,16 @@ footer {
     height: 40px;
     background-color: cadetblue;
 }
+
+footer a {
+    display: block;
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    transition: 0.25s;
+}
+
+footer a:hover {
+    color: #78c8c8;
+}
