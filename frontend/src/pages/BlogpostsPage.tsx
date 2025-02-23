@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './css/BlogpostsPage.css'
 
 const BlogpostsPage = () => {
-  const { getPosts, posts, getPost } = usePosts();
+  const { getPosts, posts } = usePosts();
   const navigate = useNavigate();
 
   // hämtar posts när komponenten laddas in
@@ -25,7 +25,6 @@ const BlogpostsPage = () => {
               <article key={post._id}>
                 <SinglePost _id={post._id} title={post.title} author={post.author} content={post.content} date={post.date} />
                 <p role="link" className="readmore" onClick={() => {
-                  getPost(post);
                   navigate(`/post/:${post._id}`);
                 }}>Läs mer ➝</p>
               </article>

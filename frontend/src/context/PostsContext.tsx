@@ -42,9 +42,9 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
     }
 
     // hämtar enskild post
-    const getPost = async (sPost: Post) => {
+    const getPost = async (id: string) => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/post/${sPost._id}`)
+            const response = await fetch(`http://127.0.0.1:3000/post/${id}`)
 
             if (!response.ok) {
                 throw new Error;
